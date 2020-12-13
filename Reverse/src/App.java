@@ -3,55 +3,57 @@ import java.util.ArrayList;
 public class App {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		int input = 12345678;
-		double num =(double)input;
-		System.out.println("User Input : "+input);
+		long input = View.getInput();
+		long num =input;
 		ArrayList<Integer> digits = new ArrayList<Integer>();
+		ArrayList<Integer> digitstemp = new ArrayList<Integer>();
 		int length =0;
-		for(int i=10; i<1000000000; i*=10) {
-			if(num/i>=1.0) {
-				length++;
-			}else {
-				length++;
-				//System.out.println("breaking");
-				break;
-			}
-		}
-		System.out.println("Length :"+length);
+		long rev=0l;
+		int[] arr;
 		
-		for(int i=length-1; i>=0; i--) {
-			int digit = (int) (num/(Math.pow(10, i)));
-			digits.add(digit);
-			num = num%(Math.pow(10, i));
-		}
+		//calculating the number of digits
+		//can not support more than 8 digits because i cannot hold more than 1000000000 in multiple of 10
+		//can not use long because i don't know how to access array items using long type index
 		
-		int[] arr= new int[length];
-		
-//		System.out.println(digits.toString());
+		length = Calculate.getNumberOfDigits(input);
 		
 		
 		
+		
+		
+		digits = Calculate.getSeperateDigits(num, length);
+		
+		
+		
+//		if(Calculate.getNumberOfDigits((digits.get(0)))>1) {
+//			//System.out.println("More than 8");
+//			int lengthtemp = Calculate.getNumberOfDigits(digits.get(0));
+//			digitstemp = Calculate.getSeperateDigits(digits.get(0), lengthtemp);
+//			digits.remove(0);
+//			digits.addAll(0, digitstemp);
+//			length=length-1+lengthtemp;
+//		}
+		arr= new int[length];
+		//reversing the digits array
 		for(int i=length-1; i>=0; i--) {
 			arr[length-1-i]=digits.get(length-1-i);
 		}
-//		for(int i=0; i<length;i++) {
-//			System.out.print(arr[i]);
+		
+//		for(int i:arr) {
+//			System.out.println(i);
 //		}
 		
-		double rev=0.0;
 		
-		
+		//multiply the digits by multiples of 10 and add, so that they are placed accordingly
 		for(int i=length-1; i>=0;i--) {
-			rev+=arr[i]*Math.pow(10, i);
+			rev+=(long)arr[i]*Calculate.getPow(10, i);
+//			System.out.println(arr[i]+" "+i +" "+rev );
 		}
-		int finalResult = (int)rev;
-		System.out.println("Final Result :"+finalResult);
+//		long longnum=Calculate.getPow(10, 16);
+//		System.out.println(longnum);
+		long finalResult = rev;
 		
-//		double rev = 0.0;
-//		for(int i=1; i<10*length; i*=10) {
-//			rev+=digits.get(i)*(i/10);
-//		}
+		View.printResult(input, finalResult);
 		
 		
 

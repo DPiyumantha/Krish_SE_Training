@@ -1,6 +1,7 @@
 package logical;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Case {
 	
@@ -13,5 +14,6 @@ public class Case {
 		return stringLines;
 		
 	}
+	
 
 }

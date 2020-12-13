@@ -1,13 +1,16 @@
+package data;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class FileDAO {
 	
-	public void getData() throws IOException {
-		String res,str="";
+	public ArrayList<String> getData() throws FileNotFoundException, IOException {
+		String str="";
+		ArrayList<String> strarr= new ArrayList<String>();
 		String path = "./src/data.txt";
 		
 		FileReader fileReader = null;
@@ -17,9 +20,7 @@ public class FileDAO {
 			fileReader = new FileReader(path);
 			bufferedreader = new BufferedReader(fileReader);
 			while( (str=bufferedreader.readLine())!=null) {
-				res=str.toUpperCase();
-				System.out.println("[CAPITALIZED]"+res);
-				System.out.println("[ORIGINAL]"+str);
+				strarr.add(str);
 			}
 			
 		} finally {
@@ -31,6 +32,7 @@ public class FileDAO {
 			}
 			
 		}
+		return strarr;
 
 	}
 	

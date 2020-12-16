@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Calculate {
+public class Calculation {
 	
 	public static int getNumberOfDigits(long num) {
 		int length =0;

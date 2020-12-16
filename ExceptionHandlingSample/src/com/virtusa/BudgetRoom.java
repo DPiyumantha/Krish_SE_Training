@@ -1,3 +1,4 @@
+package com.virtusa;
 
 public class BudgetRoom extends Room {
 

@@ -16,12 +16,13 @@ public class Reservation {
 	
 	public void confirmReservation() {
 		int payment =0;
-		Scanner s = new Scanner(System.in);
+		Scanner scanner = new Scanner(System.in);
 		System.out.println("Please pay  300 (Enter 0 to get unchecked exception)");
-		payment = s.nextInt();
+		payment = scanner.nextInt();
 		//just dividing by payment to get an Arithmatic exception here
-		double i=10/payment;
+		double randomValue=10/payment;
 		System.out.println("Your reservation is confirmed");
+		scanner.close();
 	}
 	
 

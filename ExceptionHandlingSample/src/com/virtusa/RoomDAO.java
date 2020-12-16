@@ -8,7 +8,7 @@ import java.io.IOException;
 public class RoomDAO {
 	
 	public static int getData() throws FileNotFoundException, IOException {
-		int n;
+		int number;
 		String path = "./src/data.txt";
 		
 		FileReader fileReader = null;
@@ -17,8 +17,8 @@ public class RoomDAO {
 		try {
 			fileReader = new FileReader(path);
 			bufferedreader = new BufferedReader(fileReader);
-			n=Integer.valueOf(bufferedreader.readLine());
-			return n;
+			number=Integer.valueOf(bufferedreader.readLine());
+			return number;
 		} finally {
 			if (fileReader!=null) {
 				fileReader.close();

@@ -5,10 +5,10 @@ import data.FileDAO;
 import logical.Case;
 import view.Interaction;
 
-public class App { 
+public class Application { 
 
 	public static void main(String[] args) {
-		ArrayList<String> stringLines, capitalisedStrings, results = new ArrayList<String>();
+		ArrayList<String> stringLines, results = new ArrayList<String>();
 		FileDAO textDAO= new FileDAO();
 		try {
 			//Read data from file

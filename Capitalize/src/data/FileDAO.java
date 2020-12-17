@@ -1,5 +1,4 @@
 package data;
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -12,14 +11,13 @@ public class FileDAO {
 		String str="";
 		ArrayList<String> strarr= new ArrayList<String>();
 		String path = "./src/data.txt";
-		
+		CapitalizeReader capitalizeReader=null;
 		FileReader fileReader = null;
-		BufferedReader bufferedreader =null;
 		
 		try {
 			fileReader = new FileReader(path);
-			bufferedreader = new BufferedReader(fileReader);
-			while( (str=bufferedreader.readLine())!=null) {
+			capitalizeReader = new CapitalizeReader(fileReader);
+			while( (str=capitalizeReader.readLine())!=null) {
 				strarr.add(str);
 			}
 			
@@ -27,8 +25,8 @@ public class FileDAO {
 			if (fileReader!=null) {
 				fileReader.close();
 			}
-			if (bufferedreader!=null) {
-				bufferedreader.close();
+			if (capitalizeReader!=null) {
+				capitalizeReader.close();
 			}
 			
 		}

@@ -18,6 +18,7 @@ public class Application {
 			System.out.println("Exceptions Example");
 			System.out.println("Enter 1 to create reservation [CHECKED EXCEPTION - Multiple Layers]");
 			System.out.println("Enter 2 to confirm reservation [UNCHECKED EXCEPTION]");
+			System.out.println("Enter 3 to confirm reservation [HANDLING UNCHECKED EXCEPTION]");
 			System.out.println("Enter 9 to exit");
 			input = scanner.nextInt();
 			if (input == 1) {
@@ -25,13 +26,20 @@ public class Application {
 				try {
 					reservation = hotel.createReservation();
 
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
+				} catch (FileNotFoundException fileNotFoundException) {
+					fileNotFoundException.printStackTrace();
+				} catch (IOException iOException) {
+					iOException.printStackTrace();
 				}
 			} else if (input == 2) {
 				reservation.confirmReservation();
+			} else if (input == 3) {
+				try {
+					reservation.confirmReservation();
+				} catch (ArithmeticException arithmaticException) {
+					System.err.println("Invalid input. Please try again! : " + arithmaticException.getMessage());
+					reservation.confirmReservation();
+				}
 			}
 		}
 		scanner.close();

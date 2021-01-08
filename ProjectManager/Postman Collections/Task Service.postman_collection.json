@@ -1,0 +1,165 @@
+{
+	"info": {
+		"_postman_id": "89983616-3af4-454d-96da-da0b37d20cdc",
+		"name": "Task Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Tasks",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"taskName\":\"task 1\",\r\n    \"projectId\":3,\r\n    \"progress\":\"50\",\r\n    \"member\":\"saman\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/task",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"task"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a task",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"taskName\": \"task 5\",\r\n        \"projectId\": 3,\r\n        \"progress\": 25.0,\r\n        \"member\": \"saman\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/task",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"task"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get task by Task ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/task/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"task",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all tasks by project ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/task?projectId=3",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"task"
+					],
+					"query": [
+						{
+							"key": "projectId",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a task",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"taskName\": \"task 7\",\r\n        \"projectId\": 3,\r\n        \"progress\": 100.0,\r\n        \"member\": \"saman silva\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/task/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"task",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a task",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/task/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"task",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

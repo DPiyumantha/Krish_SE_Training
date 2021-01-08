@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
+import org.springframework.web.client.RestTemplate;
 import com.dimalka.projectmanager.commons.model.projectservice.Project;
+import com.dimalka.projectmanager.commons.model.taskservice.Task;
 import com.dimalka.repository.ProjectRepository;
 
 @Service
@@ -17,6 +19,13 @@ public class ProjectServiceImpl implements ProjectService {
 	@Autowired
 	ProjectRepository projectRepository;
 
+	@Bean
+	RestTemplate getRestTemplate(RestTemplateBuilder builder) {
+		return builder.build();
+	};
+	@Autowired
+	RestTemplate restTemplate;
+	
 	@Override
 	public Project saveProject(Project project) {
 		return projectRepository.save(project);
@@ -43,22 +52,35 @@ public class ProjectServiceImpl implements ProjectService {
 		return projectRepository.findByStatus(status);
 	}
 
+
 	@Override
 	public void deleteProjectById(int id) {
-//		try {
-//			projectRepository.deleteById(id);
-//			return new ResponseEntity<String>("Deleted project with id " + id, HttpStatus.OK);
-//		} catch (Exception exception) {
-//			return new ResponseEntity<String>("No project with id " + id, HttpStatus.NOT_FOUND);
-//		}
-		
 		 projectRepository.deleteById(id);
-
+		 
 	}
-
 	@Override
 	public int updateProjectById(String projectName, String projectStatus, int projectId) {
 		return projectRepository.updateProjectById(projectName, projectStatus, projectId);
+	}
+
+	public List<Project> getFilteredProjects(String status, String projectClient, String deadLine) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Project> getAllProjectsByClient(String projectClient) {
+		return projectRepository.findByProjectClient(projectClient);
+	}
+
+	public List<Task> getAllTaskOfProject(Integer projectId) {
+		return getAllTask(projectId);
+	}
+	
+	private List<Task> getAllTask(Integer projectId) {
+		ResponseEntity<Task[]> tasks = restTemplate.getForEntity("http://localhost:8081/task?projectId="+projectId,Task[].class);
+		 List<Task> taskList = List.of(tasks.getBody());
+		 return taskList;
 	}
 
 }

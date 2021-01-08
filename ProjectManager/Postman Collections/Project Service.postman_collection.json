@@ -1,0 +1,221 @@
+{
+	"info": {
+		"_postman_id": "c464d504-7ec7-4fc8-9dcb-824071bb5dd2",
+		"name": "Project Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Update a project",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"projectId\": 1,\r\n        \"projectName\": \"Project 01\",\r\n        \"status\": \"active\",\r\n        \"deadLine\": \"2020-08-07T00:00:00.000+00:00\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/project/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"project",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get project by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/project/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"project",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all project",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/project",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"project"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a project",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"projectName\": \"Project 64854\",\r\n        \"status\": \"inactive\",\r\n        \"deadLine\": \"2020-08-09\",\r\n        \"projectClient\":\"BOC\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/project",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"project"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a project",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/project/4",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"project",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all projects by status",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/project?status=active",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"project"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "active"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all projects by client",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/project?projectClient=slt",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"project"
+					],
+					"query": [
+						{
+							"key": "projectClient",
+							"value": "slt"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all tasks under a project",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/project/3/tasks",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"project",
+						"3",
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,10 +1,7 @@
 package com.dimalka.controller;
 
 import java.util.List;
-import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.annotations.common.util.impl.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.logging.LogFile;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,37 +10,22 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dimalka.projectmanager.commons.model.projectservice.Project;
+import com.dimalka.projectmanager.commons.model.taskservice.Task;
 import com.dimalka.service.ProjectServiceImpl;
 
 @RestController
 public class MainController {
-	private final org.jboss.logging.Logger LOGGER = LoggerFactory.logger(this.getClass());
 	@Autowired
 	ProjectServiceImpl projectServiceImpl;
 
-	@GetMapping(value = "/")
-	public String hello() {
-		return "Hello world";
-	}
-
-	@GetMapping(value = "/project", params = { "status" })
-	public List<Project> viewAllProjects(@RequestParam("status") String status) {
-
-		return projectServiceImpl.getAllProjectsByStatus(status);
-
-	}
-
-	@GetMapping(value = "/project")
-	public List<Project> viewAllProjects() {
-
-		return projectServiceImpl.getAllProjects();
-
+	//Basic CRUD
+	@PostMapping(value = "/project")
+	public ResponseEntity<Project> createProject(@RequestBody Project project) {
+		return new ResponseEntity<Project>(projectServiceImpl.saveProject(project), HttpStatus.CREATED);
 	}
 
 	@GetMapping(value = "/project/{id}")
@@ -51,22 +33,11 @@ public class MainController {
 		return projectServiceImpl.getProjectById(id);
 	}
 
-	@DeleteMapping(value = "/project/{id}")
-	public ResponseEntity<String> deleteProjectById(@PathVariable("id") int id) {
-		try {
-			projectServiceImpl.deleteProjectById(id);
-			return new ResponseEntity<String>("Deleted project with id " + id, HttpStatus.OK);
-		} catch (Exception exception) {
+	@GetMapping(value = "/project")
+	public List<Project> getAllProjects() {
 
-			LOGGER.info("ddgdgd");
-			return new ResponseEntity<String>("No project with id " + id, HttpStatus.NOT_FOUND);
-		}
-	}
+		return projectServiceImpl.getAllProjects();
 
-	@PostMapping(value = "/project")
-	public Project createProject(@RequestBody Project project) {
-		System.out.println(project);
-		return projectServiceImpl.saveProject(project);
 	}
 
 	@PatchMapping(value = "/project/{id}")
@@ -74,4 +45,40 @@ public class MainController {
 		return projectServiceImpl.updateProjectById(project.getProjectName(), project.getStatus(),
 				project.getProjectId());
 	}
+
+	@DeleteMapping(value = "/project/{id}")
+	public ResponseEntity<Integer> deleteProjectById(@PathVariable("id") int id) {
+		projectServiceImpl.deleteProjectById(id);
+		return new ResponseEntity<Integer>(id, HttpStatus.OK);
+	}
+
+	//For Filtering
+	@GetMapping(value = "/project", params = { "status" })
+	public List<Project> getProjectsByStatus(@RequestParam("status") String status) {
+		return projectServiceImpl.getAllProjectsByStatus(status);
+
+	}
+
+	@GetMapping(value = "/project", params = { "projectClient" })
+	public List<Project> getProjectsByClient(@RequestParam("projectClient") String projectClient) {
+		return projectServiceImpl.getAllProjectsByClient(projectClient);
+
+	}
+
+	// To get all the tasks from the task-service which are relevant to a project
+	@GetMapping(value = "/project/{id}/tasks")
+	public List<Task> getAllTaskOfProject(@PathVariable("id") Integer id) {
+		return projectServiceImpl.getAllTaskOfProject(id);
+	}
+
+//	@GetMapping(value = "/project", params = { "status", "projectClient", "deadLine" })
+//	public List<Project> getFilteredProjects(
+//	@RequestParam("status") String status, 
+//	@RequestParam("projectClient") String projectClient, 
+//	@RequestParam("deadLine") String deadLine) {
+//
+//		return projectServiceImpl.getFilteredProjects(status, projectClient, deadLine);
+//
+//	}
+
 }

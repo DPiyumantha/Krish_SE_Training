@@ -60,7 +60,7 @@ public class TaskServiceImpl implements TaskService {
 	
 	
 	private Project getProjectById(int id) {
-		 Project project = restTemplate.getForObject("http://localhost:8080/project/"+id, Project.class);
+		 Project project = restTemplate.getForObject("http://project/project/"+id, Project.class);
 		 System.out.println(project);
 		 return project;
 	}

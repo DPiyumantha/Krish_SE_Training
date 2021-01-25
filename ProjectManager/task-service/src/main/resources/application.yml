@@ -12,11 +12,3 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
   application:
     name: task
-logging:
-  file: /logs/application-debug.log
-  level:
-    root: INFO
-  pattern:
-    file: "%d %-5level [%thread] %logger : %msg%n"
-server:
-  port: 8081

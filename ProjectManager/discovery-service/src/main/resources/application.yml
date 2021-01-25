@@ -1,5 +1,5 @@
 eureka:
   client:
     register-with-eureka: false
-    fetch-registry: false
+    fetch-registry: false  instance:    hostname: Colombo
 server:  port: 8761

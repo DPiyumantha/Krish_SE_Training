@@ -6,8 +6,10 @@ spring:
 #      name: task 
       
 server:
-  port: 8082
+  port: 0
 eureka:
  client:
   register-with-eureka: true
-  fetch-registry: true#  instance:#    instance-id: ${spring.application.name}-${random.int}
+  fetch-registry: true instance:
+  instance-id: ${spring.application.name}-${random.int}
+  hostname: localhost

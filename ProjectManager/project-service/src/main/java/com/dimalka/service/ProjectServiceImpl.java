@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ public class ProjectServiceImpl implements ProjectService {
 	@Autowired
 	ProjectRepository projectRepository;
 
+	@LoadBalanced
 	@Bean
 	RestTemplate getRestTemplate(RestTemplateBuilder builder) {
 		return builder.build();
@@ -78,7 +80,7 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 	
 	private List<Task> getAllTask(Integer projectId) {
-		ResponseEntity<Task[]> tasks = restTemplate.getForEntity("http://localhost:8081/task?projectId="+projectId,Task[].class);
+		ResponseEntity<Task[]> tasks = restTemplate.getForEntity("http://task/task?projectId="+projectId,Task[].class);
 		 List<Task> taskList = List.of(tasks.getBody());
 		 return taskList;
 	}

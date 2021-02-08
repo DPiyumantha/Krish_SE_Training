@@ -1,4 +1,4 @@
-package com.virtusa;
+package com.dimalka;
 import java.util.Scanner;
 
 public class View {

@@ -1,4 +1,4 @@
-package com.virtusa;
+package com.dimalka;
 import java.util.ArrayList;
 
 public class Calculation {

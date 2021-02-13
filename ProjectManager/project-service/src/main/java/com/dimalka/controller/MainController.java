@@ -1,6 +1,7 @@
 package com.dimalka.controller;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,57 +20,57 @@ import com.dimalka.service.ProjectServiceImpl;
 
 @RestController
 public class MainController {
-	@Autowired
-	ProjectServiceImpl projectServiceImpl;
+    @Autowired
+    ProjectServiceImpl projectServiceImpl;
 
-	//Basic CRUD
-	@PostMapping(value = "/project")
-	public ResponseEntity<Project> createProject(@RequestBody Project project) {
-		return new ResponseEntity<Project>(projectServiceImpl.saveProject(project), HttpStatus.CREATED);
-	}
+    //Basic CRUD
+    @PostMapping(value = "/project")
+    public ResponseEntity<Project> createProject(@RequestBody Project project) {
+        return new ResponseEntity<Project>(projectServiceImpl.saveProject(project), HttpStatus.CREATED);
+    }
 
-	@GetMapping(value = "/project/{id}")
-	public Project getProjectById(@PathVariable("id") int id) {
-		return projectServiceImpl.getProjectById(id);
-	}
+    @GetMapping(value = "/project/{id}")
+    public Project getProjectById(@PathVariable("id") int id) {
+        return projectServiceImpl.getProjectById(id);
+    }
 
-	@GetMapping(value = "/project")
-	public List<Project> getAllProjects() {
+    @GetMapping(value = "/project")
+    public List<Project> getAllProjects() {
 
-		return projectServiceImpl.getAllProjects();
+        return projectServiceImpl.getAllProjects();
 
-	}
+    }
 
-	@PatchMapping(value = "/project/{id}")
-	public int updateProject(@PathVariable int id, @RequestBody Project project) {
-		return projectServiceImpl.updateProjectById(project.getProjectName(), project.getStatus(),
-				project.getProjectId());
-	}
+    @PatchMapping(value = "/project/{id}")
+    public int updateProject(@PathVariable int id, @RequestBody Project project) {
+        return projectServiceImpl.updateProjectById(project.getProjectName(), project.getStatus(),
+                project.getProjectId());
+    }
 
-	@DeleteMapping(value = "/project/{id}")
-	public ResponseEntity<Integer> deleteProjectById(@PathVariable("id") int id) {
-		projectServiceImpl.deleteProjectById(id);
-		return new ResponseEntity<Integer>(id, HttpStatus.OK);
-	}
+    @DeleteMapping(value = "/project/{id}")
+    public ResponseEntity<Integer> deleteProjectById(@PathVariable("id") int id) {
+        projectServiceImpl.deleteProjectById(id);
+        return new ResponseEntity<Integer>(id, HttpStatus.OK);
+    }
 
-	//For Filtering
-	@GetMapping(value = "/project", params = { "status" })
-	public List<Project> getProjectsByStatus(@RequestParam("status") String status) {
-		return projectServiceImpl.getAllProjectsByStatus(status);
+    //For Filtering
+    @GetMapping(value = "/project", params = {"status"})
+    public List<Project> getProjectsByStatus(@RequestParam("status") String status) {
+        return projectServiceImpl.getAllProjectsByStatus(status);
 
-	}
+    }
 
-	@GetMapping(value = "/project", params = { "projectClient" })
-	public List<Project> getProjectsByClient(@RequestParam("projectClient") String projectClient) {
-		return projectServiceImpl.getAllProjectsByClient(projectClient);
+    @GetMapping(value = "/project", params = {"projectClient"})
+    public List<Project> getProjectsByClient(@RequestParam("projectClient") String projectClient) {
+        return projectServiceImpl.getAllProjectsByClient(projectClient);
 
-	}
+    }
 
-	// To get all the tasks from the task-service which are relevant to a project
-	@GetMapping(value = "/project/{id}/tasks")
-	public List<Task> getAllTaskOfProject(@PathVariable("id") Integer id) {
-		return projectServiceImpl.getAllTaskOfProject(id);
-	}
+    // To get all the tasks from the task-service which are relevant to a project
+    @GetMapping(value = "/project/{id}/tasks")
+    public List<Task> getAllTaskOfProject(@PathVariable("id") Integer id) {
+        return projectServiceImpl.getAllTaskOfProject(id);
+    }
 
 //	@GetMapping(value = "/project", params = { "status", "projectClient", "deadLine" })
 //	public List<Project> getFilteredProjects(

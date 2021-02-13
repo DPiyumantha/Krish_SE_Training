@@ -12,16 +12,17 @@ import org.springframework.transaction.annotation.Transactional;
 import com.dimalka.projectmanager.commons.model.projectservice.Project;
 
 
+public interface ProjectRepository extends JpaRepository<Project, Integer> {
 
-public interface ProjectRepository extends JpaRepository<Project, Integer>{
+    List<Project> findByStatus(String status);
 
-	List<Project> findByStatus(String status);
-	List<Project> findByProjectClient(String projectClient);
-	@Modifying
-	@Transactional
-	@Query("update Project p set p.projectName=?1 , p.status=?2 where projectId=?3")
-	public int updateProjectById(String projectName, String projectStatus, int projectId);
-	
+    List<Project> findByProjectClient(String projectClient);
+
+    @Modifying
+    @Transactional
+    @Query("update Project p set p.projectName=?1 , p.status=?2 where projectId=?3")
+    public int updateProjectById(String projectName, String projectStatus, int projectId);
+
 //	
 //	@Query("select all from  Project where ")
 //	public int getFilteredProjects(String status, String projectClient, Date deadLine);

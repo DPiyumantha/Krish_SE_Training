@@ -12,15 +12,16 @@ import com.dimalka.projectmanager.commons.model.taskservice.Task;
 
 @Service
 public interface TaskService {
-	
-	List<Task> getAllTasksByProjectId(@Param("id") int id);
-	Task savetask(Task task) throws Exception;
 
-	List<Task> getAllTask();
+    List<Task> getAllTasksByProjectId(@Param("id") int id);
 
-	Task getTaskById(int id) throws Exception;
+    Task savetask(Task task) throws Exception;
 
-	void deleteTaskById(int id);
+    List<Task> getAllTask();
 
-	public int updateTask(Task task, int id);
+    Task getTaskById(int id) throws Exception;
+
+    void deleteTaskById(int id);
+
+    public int updateTask(Task task, int id);
 }

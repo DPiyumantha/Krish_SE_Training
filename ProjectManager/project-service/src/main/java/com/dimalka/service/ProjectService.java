@@ -11,21 +11,22 @@ import org.springframework.data.repository.query.Param;
 import com.dimalka.projectmanager.commons.model.projectservice.Project;
 
 
+public interface ProjectService {
 
-public interface ProjectService  {
-	
-	List<Project> getAllProjectsByClient(@Param("projectClient") String projectClient);
-	List<Project> getAllProjectsByStatus(@Param("status") String status);
-	Project saveProject(Project project);
+    List<Project> getAllProjectsByClient(@Param("projectClient") String projectClient);
 
-	List<Project> getAllProjects();
+    List<Project> getAllProjectsByStatus(@Param("status") String status);
 
-	Project getProjectById(int id);
+    Project saveProject(Project project);
 
-	void deleteProjectById(int id);
+    List<Project> getAllProjects();
 
-	int updateProjectById(String projectName, String projectStatus, int projectId);
-	
-	public List<Project> getFilteredProjects(String status, String projectClient, String deadLine);
+    Project getProjectById(int id);
+
+    void deleteProjectById(int id);
+
+    int updateProjectById(String projectName, String projectStatus, int projectId);
+
+    public List<Project> getFilteredProjects(String status, String projectClient, String deadLine);
 }
  

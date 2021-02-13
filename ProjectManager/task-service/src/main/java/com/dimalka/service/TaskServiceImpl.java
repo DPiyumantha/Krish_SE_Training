@@ -17,72 +17,72 @@ import com.dimalka.repository.TaskRepository;
 
 @Service
 public class TaskServiceImpl implements TaskService {
-	
-	@Autowired
-	TaskRepository taskRepository;
-	
-	@Bean
-	RestTemplate getRestTemplate(RestTemplateBuilder builder) {
-		return builder.build();
-	};
-	
-	@Autowired
-	RestTemplate restTemplate;
 
-	@Override
-	public List<Task> getAllTasksByProjectId(int id) {
-		return taskRepository.findByProjectId(id);
-	
-	}
+    @Autowired
+    TaskRepository taskRepository;
 
-	
-	@Override
-	public List<Task> getAllTask() {
-		return taskRepository.findAll();
-	}
+    @Bean
+    RestTemplate getRestTemplate(RestTemplateBuilder builder) {
+        return builder.build();
+    }
 
-	@Override
-	public Task getTaskById(int id){
-		 Optional<Task> task = taskRepository.findById(id);
-		 return task.get();
-	}
+    ;
 
-	@Override
-	public Task savetask(Task task) throws Exception {
-		Project project= getProjectById(task.getProjectId());
-		if(project==null) {
-			throw new Exception();
-			
-		}else {
-			return taskRepository.save(task);
-		}
-	}
-	
-	
-	private Project getProjectById(int id) {
-		 Project project = restTemplate.getForObject("http://project/project/"+id, Project.class);
-		 System.out.println(project);
-		 return project;
-	}
+    @Autowired
+    RestTemplate restTemplate;
+
+    @Override
+    public List<Task> getAllTasksByProjectId(int id) {
+        return taskRepository.findByProjectId(id);
+
+    }
 
 
-	public int updateTask(Task task, int id) {
-		return taskRepository.updateTask(
-				task.getTaskName(),
-				task.getProjectId(),
-				 task.getProgress(),
-				 task.getMember(),
-				 id
-				);
-	}
+    @Override
+    public List<Task> getAllTask() {
+        return taskRepository.findAll();
+    }
+
+    @Override
+    public Task getTaskById(int id) {
+        Optional<Task> task = taskRepository.findById(id);
+        return task.get();
+    }
+
+    @Override
+    public Task savetask(Task task) throws Exception {
+        Project project = getProjectById(task.getProjectId());
+        if (project == null) {
+            throw new Exception();
+
+        } else {
+            return taskRepository.save(task);
+        }
+    }
 
 
-	public void deleteTaskById(int id) {
-		taskRepository.deleteById(id);
-		
-	}
+    private Project getProjectById(int id) {
+        Project project = restTemplate.getForObject("http://project/project/" + id, Project.class);
+        System.out.println(project);
+        return project;
+    }
 
-	
+
+    public int updateTask(Task task, int id) {
+        return taskRepository.updateTask(
+                task.getTaskName(),
+                task.getProjectId(),
+                task.getProgress(),
+                task.getMember(),
+                id
+        );
+    }
+
+
+    public void deleteTaskById(int id) {
+        taskRepository.deleteById(id);
+
+    }
 
 
 }
